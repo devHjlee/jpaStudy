@@ -16,6 +16,6 @@ public class Delivery {
     private Orders order;
     @Embedded
     private Address address;
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)//default ORDINAL 숫자 EX: READY 1 COMP 2 >>> READY XXX COMP 중간에 새로운 타입이 추가될시 장애날 수 있으니 String 필수
     private DeliveryStatus status; //ENUM [READY(준비), COMP(배송)]
 }

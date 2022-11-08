@@ -14,8 +14,8 @@ public class Member {
     @Column(name = "member_id")
     private Long id;
     private String name;
-    @Embedded
+    @Embedded//내장타입
     private Address address;
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member") // order entity member 필드 값을 넣는다
     private List<Orders> orders = new ArrayList<>();
 }

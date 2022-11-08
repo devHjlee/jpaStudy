@@ -1,13 +1,14 @@
-package com.jpastudy.domain;
+package com.jpastudy.domain.item;
 
+import com.jpastudy.domain.Category;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "dtype")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)//상속관계 전략
+@DiscriminatorColumn(name = "itemType") // 싱글테이블 book album movie 구분값
 @Getter @Setter
 public abstract class Item {
     @Id @GeneratedValue

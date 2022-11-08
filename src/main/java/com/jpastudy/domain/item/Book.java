@@ -1,13 +1,13 @@
-package com.jpastudy.domain;
+package com.jpastudy.domain.item;
 
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 @Entity
-@DiscriminatorValue("M")
+@DiscriminatorValue("B")
 @Getter @Setter
-public class Movie extends Item {
-    private String director;
-    private String actor;
+public class Book extends Item {
+    private String author;
+    private String isbn;
 }

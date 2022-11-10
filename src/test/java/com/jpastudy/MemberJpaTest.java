@@ -2,7 +2,7 @@ package com.jpastudy;
 
 import com.jpastudy.domain.Member;
 import com.jpastudy.repository.MemberRepository;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,7 +16,7 @@ import java.util.List;
 @SpringBootTest
 public class MemberJpaTest {
     @Autowired
-    MemberRepository memberRepository;
+    private MemberRepository memberRepository;
     @Test
     @Transactional
     @Rollback(false)

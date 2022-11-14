@@ -9,7 +9,13 @@ implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:${version}")
 
 
 # Annotaion 정리
-## @Embedded , @Embeddable
+## Lombok
+### @RequiredArgsConstructor
+*   Lombok Annotation 이며, private final 로 선언된 필드만 생성자를 생성해줌
+*   Spring-Data-Jpa 를 사용하면 @PersistenceContext 대신 @Autowired 로 인젝션이 가능하게 Spring boot에서 지원해주고 그로인해서 @RequiredArgsConstructor 통해 생성자를 생성
+
+## JPA
+### @Embedded , @Embeddable
 *   회원(Member), 직원(Emp)테이블에 주소에 관한 동일한 컬럼을 사용하게 되는데 코드의 가독성,재사용을 위해 사용
 *   Ex) Member 테이블에 zipCode, address1, address2 // Emp 테이블에 zipCode, address1, address2 사용시 Address 객체에 zipCode, address1,address2 생성하여 
 Member.Emp Entity 에 @Embedded Address 로 변경
@@ -51,7 +57,7 @@ public class Emp(){
 
 
 
-## @Enumerated
+### @Enumerated
 *   EnumType ORDINAL
     * default 값이며 상태값을 숫자로 저장최초
     * 상태값을 READY,COMP(1,2)만 사용하다 중간에 다른 상태값 DEL 이 추가되면 READY,DEL,COMP (1,2,3)으로 밀리므로 STRING 사용을 추천

@@ -11,8 +11,8 @@ implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:${version}")
 # Annotaion 정리
 ## Lombok
 ### @RequiredArgsConstructor
-*   Lombok Annotation 이며, private final 로 선언된 필드만 생성자를 생성해줌
-*   Spring-Data-Jpa 를 사용하면 @PersistenceContext 대신 @Autowired 로 인젝션이 가능하게 Spring boot에서 지원해주고 그로인해서 @RequiredArgsConstructor 통해 생성자를 생성
+*   Lombok Annotation 이며,생성자를 생성시 private final 로 선언된 필드만 생성해줌
+*   Spring-Data-Jpa 를 사용하면 @PersistenceContext 대신 @Autowired 로 인젝션이 가능하게 Spring boot에서 지원해주고 그로인해 @RequiredArgsConstructor 통해 생성자를 생성
 
 ## JPA
 ### @Embedded , @Embeddable
@@ -35,7 +35,7 @@ public class Emp(){
 }
 
 
-변경
+//변경
 @Embeddalbe
 public class Address(){
   private zipCode;

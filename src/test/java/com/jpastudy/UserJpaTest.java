@@ -12,9 +12,16 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class UserJpaTest {
+
+    @PersistenceUnit //EntityManagerFactory를 주입하여 직접 사용가능
+    private EntityManagerFactory emf;
+
     @Autowired
     UserRepository userRepository;
     @Test

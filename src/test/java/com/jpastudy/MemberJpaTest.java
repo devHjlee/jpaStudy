@@ -3,11 +3,14 @@ package com.jpastudy;
 import com.jpastudy.domain.Member;
 import com.jpastudy.repository.MemberRepository;
 import com.jpastudy.service.MemberService;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -19,6 +22,7 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MemberJpaTest {
 
     @Autowired
@@ -27,8 +31,8 @@ public class MemberJpaTest {
     MemberRepository memberRepository;
 
     @Test
-    @Rollback(false)
-    public void 회원가입() throws Exception{
+    //@Rollback(false)
+    public void test1() throws Exception{
         //Given
         Member member = new Member();
         member.setName("kim");
@@ -41,18 +45,16 @@ public class MemberJpaTest {
     }
 
     @Test(expected = IllegalStateException.class)
-    @Rollback(false)
-    public void 중복회원예외() throws Exception{
+    public void test2() throws Exception{
         //Given
         Member member = new Member();
         member.setName("kim");
-
         Member member2 = new Member();
-        member.setName("kim");
-
-        //when
+        member2.setName("kim");
+        //When
         memberService.join(member);
-        memberService.join(member2);
+        memberService.join(member2); //예외가 발생해야 한다.
+
 
         //then
         fail("예외 발생");

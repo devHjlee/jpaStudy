@@ -7,6 +7,7 @@ import com.jpastudy.domain.Orders;
 import com.jpastudy.domain.item.Book;
 
 import com.jpastudy.domain.item.Item;
+import com.jpastudy.exception.NotEnoughStockException;
 import com.jpastudy.repository.MemberRepository;
 import com.jpastudy.repository.OrderRepository;
 import org.junit.Test;
@@ -24,7 +25,6 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-@Rollback(false)
 public class OrderServiceTest {
 
     @Autowired
@@ -40,15 +40,8 @@ public class OrderServiceTest {
     @Test
     public void 상품주문() throws Exception {
         //given
-        Member member = new Member();
-        member.setName("회원1");
-        member.setAddress(new Address("서울","강가","123123"));
-        em.persist(member);
-        Item book = new Book();
-        book.setName("JPA");
-        book.setPrice(10000);
-        book.setStockQuantity(10);
-        em.persist(book);
+        Member member = createMember();
+        Book book = createItem("A",10,10);
         book.setPrice(20000);
         int orderCount = 2;
         //when
@@ -66,9 +59,17 @@ public class OrderServiceTest {
 
     }
 
-    @Test
+    @Test(expected = NotEnoughStockException.class)
     public void 상품주문_재고수량초과() throws  Exception {
+        Member member = createMember();
+        Item item = createItem("B",100,3);
+        int orderCount = 3;
+        orderService.order(member.getId(), item.getId(), orderCount);
+        Member member2 = new Member();
+        member2.setName("AA");
 
+
+        fail("재고수량부족");
     }
 
     @Test
@@ -84,5 +85,22 @@ public class OrderServiceTest {
         //em.detach(member);
         member.setName("AAAAAAAA");
         //em.close();
+    }
+
+    private Member createMember() {
+        Member member = new Member();
+        member.setName("회원12");
+        member.setAddress(new Address("서울","강가","123123"));
+        em.persist(member);
+        return member;
+    }
+
+    private Book createItem(String name, int price, int stockQty) {
+        Book book = new Book();
+        book.setName(name);
+        book.setPrice(price);
+        book.setStockQuantity(stockQty);
+        em.persist(book);
+        return book;
     }
 }
